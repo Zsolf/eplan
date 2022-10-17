@@ -1,0 +1,103 @@
+::ng-deep body{
+  background-color: #171738;
+}
+
+.cardDiv{
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.main{
+  width: 500px;
+  min-width: 500px;
+  height: 300px;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items:center;
+  background: #eae151;
+}
+
+
+form{
+  margin-top: -30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items:center;
+  size: 100px;
+}
+
+h2 {
+  position: relative;
+  bottom: -50px;
+  left: -190px;
+  font-size: 25px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.formCard{
+  margin-top: 60px;
+  height: 80px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items:center;
+  background: whitesmoke;
+}
+
+.mat-form-field{
+  width: 300px !important;
+  margin-left: -10px;
+}
+
+.icon{
+  width: 35px;
+  height: 25px;
+  position: relative;
+  bottom: -30px;
+  opacity: 50%;
+}
+
+input{
+  position: relative;
+  left: 30px;
+  font-size: 30px;
+  background-color: whitesmoke;
+}
+
+.mat-form-field{
+  width: 250px !important;
+  margin-left: -35px;
+}
+
+.buttons{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items:center;
+  margin-top: 30px;
+}
+
+
+button{
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.login{
+  font-size: 25px !important;
+  color:whitesmoke;
+  width: 300px;
+  height: 50px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#171738), color-stop(40%,#150738), color-stop(100%,#171738)) !important;
+}
+
+.linvelo{
+  right: 5px;
+  position: absolute;
+}

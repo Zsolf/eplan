@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+
+body { margin: 0; font-family: 'Baskerville',Times,'Times New Roman',serif; }
+
+
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
