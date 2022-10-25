@@ -5,14 +5,10 @@ import { NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatDialogModule} from '@angular/material/dialog';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
+import { MainModule} from './main/main.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +22,8 @@ import { MatMenuModule } from '@angular/material/menu';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    MainModule
   ],
   providers: [],
   bootstrap: [AppComponent]

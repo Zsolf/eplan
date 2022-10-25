@@ -1,0 +1,51 @@
+<div class="menubar">
+  <mat-toolbar class="mat-elevation-z8" >
+    <img class="logo" src="assets/eplan.png">
+
+    <div class="profile">
+      <img class="pfp" src="assets/profile.png">
+      <h2 class="name">Martin</h2>
+    </div>
+  </mat-toolbar>
+</div>
+
+<div class="sidebar-div">
+  <mat-card class="sidebar">
+    <p-tree [value]="files1">asd</p-tree>
+  </mat-card>
+</div>
+
+<div class="main-content-div">
+  <mat-card class="main-content">
+  <full-calendar [options]="calendarOptions"></full-calendar>
+  </mat-card>
+  <div class="main-tasks">
+    <mat-card class="title">
+      <h1>My tasks</h1>
+    </mat-card>
+    <mat-card class="tasks">
+      <div class="task-list">
+        <mat-card class="task">
+          <h2>Task 1</h2>
+          <h2 class="deadline">06-12-2022</h2>
+        </mat-card>
+        <mat-card class="task">
+          <h2>Task 2</h2>
+          <h2 class="deadline">09-12-2022</h2>
+        </mat-card>
+        <mat-card class="task">
+          <h2>Task 3</h2>
+          <h2 class="deadline">22-12-2022</h2>
+        </mat-card>
+        <mat-card class="task">
+          <h2>Task 4</h2>
+          <h2 class="deadline">04-01-2023</h2>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<!--<app-project></app-project> -->
+
+<img class="linvelo" src="assets/linvelo.png">

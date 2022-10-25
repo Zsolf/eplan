@@ -1,0 +1,110 @@
+.main-content-div{
+  position: absolute;
+  margin-left: 400px;
+  margin-top: 100px;
+  height: inherit;
+  z-index: 10;
+  display: flex;
+}
+
+.main-content{
+  background: #f8f6ca;
+  height: 550px;
+  width: 1112px;
+}
+
+::ng-deep .title{
+  margin-left: 20px;
+  width: 400px;
+  background-color: white;
+  height: 52px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+::ng-deep .p-editor-toolbar{
+
+}
+
+::ng-deep .p-editor-container{
+  padding-left: 25px;
+  padding-top: 10px;
+  width: 750px;
+  height: 300px;
+}
+
+.members-div{
+  margin-left: 30px;
+  height: inherit;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: absolute;
+  right: 20px;
+  top: 0px;
+}
+
+.members{
+  height: 492px;
+  margin-top: 30px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+  display: flex;
+  flex-direction: column;
+}
+
+.pfp{
+  width: 50px;
+  filter: invert(100%);
+  margin-right: 60px;
+  margin-top: 10px;
+}
+
+.profile{
+  margin-top: -20px;
+  display: inline-flex;
+  margin-bottom: 30px;
+}
+
+.name{
+  margin-top:20px;
+  font-size: 30px;
+  font-family: 'jost2' !important;
+  margin-right: 10px;
+}
+
+::ng-deep .p-progressbar-determinate{
+  left: 25px;
+  width: 725px;
+  margin-top: 60px;
+  background: white;
+  border: 2px solid black;
+}
+
+::ng-deep .p-progressbar-value{
+  background: limegreen !important;
+}
+
+.buttons{
+  margin-top: 25px;
+  right: 350px;
+  position: absolute;
+}
+
+.manage{
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+  border: 2px solid black;
+  font-weight: 700;
+  font-size: 22px;
+  border-radius: 30px;
+  width: 200px;
+}
+
+.join{
+  margin-left: 20px;
+  border: 2px solid black;
+  border-radius: 30px;
+  font-size: 22px;
+  width: 100px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,limegreen), color-stop(30%,limegreen), color-stop(100%,limegreen));
+}
