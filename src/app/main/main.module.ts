@@ -15,7 +15,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EditorModule} from 'primeng/editor';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {MatButtonModule} from '@angular/material/button';
-import { TasksComponent } from './tasks/tasks.component';
 import { PageComponent } from './page/page.component';
 
 FullCalendarModule.registerPlugins([
@@ -23,7 +22,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [MainComponent, ProjectComponent, TasksComponent, PageComponent],
+  declarations: [MainComponent, ProjectComponent, PageComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
