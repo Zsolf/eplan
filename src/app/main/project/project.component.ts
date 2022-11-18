@@ -16,8 +16,8 @@ export class ProjectComponent implements OnInit {
     // This is a test for the database connection. Most of the database queries requires you to subsribe tot them which means
     // you wont get the data instantly, so you have to wait for it, but because of that the app is very responsive, since if you
     // change something it will change in the app too, because you are subscribed to the channel aka watching for changes.
-    this.fbService.getById('Collection-test', 'PLuOQmtEQGzVNxF8qcc2').subscribe(result => {
-      this.text = result.text;
+    this.fbService.getPagesByProject('1').subscribe(result => {
+      this.text = result[0].text + ' ' + result[1].text;
       console.log(result);
     });
   }

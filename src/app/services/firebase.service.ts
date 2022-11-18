@@ -20,6 +20,10 @@ export class FirebaseService {
     return this.afs.collection(collectionName).doc(id).valueChanges();
   }
 
+  getPagesByProject(project: string): Observable<any>{
+    return this.afs.collection('Pages', ref => ref.where('project', '==', project)).valueChanges();
+  }
+
   update(collectionName: string, id: string, data: any){
     this.afs.collection(collectionName).doc(id).update(data);
   }
