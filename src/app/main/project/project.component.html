@@ -1,17 +1,19 @@
 <div class="main-content-div">
   <mat-card class="main-content">
-    <form>
-      <mat-form-field class="title">
-        <input matInput placeholder="Title">
-      </mat-form-field>
-    </form>
-    <p-editor [(ngModel)]="text"></p-editor>
-    <p-progressBar [ngClass]="'progressBar'" value="60" ></p-progressBar>
+      <form>
+        <mat-form-field class="title">
+          <input matInput placeholder="Title">
+        </mat-form-field>
+      </form>
+      <div class="left-content">
+      <p-editor [(ngModel)]="text"></p-editor>
+      <p-progressBar [ngClass]="'progressBar'" value="60" ></p-progressBar>
 
     <div class="buttons">
       <button mat-button class="manage">Manage Tasks</button>
       <button mat-button class="join">Join</button>
     </div>
+      </div>
     <div class="members-div">
       <mat-card class="members">
         <div class="profile">
