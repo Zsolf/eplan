@@ -16,6 +16,7 @@ import {EditorModule} from 'primeng/editor';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {MatButtonModule} from '@angular/material/button';
 import { PageComponent } from './page/page.component';
+import {AppRoutingModule} from '../app-routing.module';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin
@@ -36,7 +37,8 @@ FullCalendarModule.registerPlugins([
     BrowserAnimationsModule,
     EditorModule,
     ProgressBarModule,
-    MatButtonModule
+    MatButtonModule,
+    AppRoutingModule
   ],
   exports:[
     MainComponent
