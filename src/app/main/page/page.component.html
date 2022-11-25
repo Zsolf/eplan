@@ -2,11 +2,11 @@
     <mat-card class="main-content">
         <h2>&nbsp;Project Task's Page</h2>
         <br>
-        <p-editor [(ngModel)]="text"></p-editor>
+        <p-editor></p-editor>
 
         <div class="comments-div">
           <mat-card class="comments">
-            <h4 class="comment-content">Markus: comment
+            <h4 class="comment-content" >{{author}}: {{comment}}
               <mat-divider></mat-divider>
             </h4>
             <h4 class="comment-content">Lara: comment
@@ -17,11 +17,13 @@
             </h4>
 
             <mat-form-field class="title">
-              <input matInput placeholder="Comment...">
+              <input matInput placeholder="Comment..." [(ngModel)] = "this.myComment">
             </mat-form-field>
-          
+            
+            <button mat-button class="send" (click)="sendComment()">Send</button>
 
           </mat-card>
+
         </div>
 
         <div class="buttons">

@@ -31,4 +31,8 @@ export class FirebaseService {
   delete(collectionName: string, id: string){
     return this.afs.collection(collectionName).doc(id).delete();
   }
+
+  getCommentsByPage(pageID: string): Observable<any>{
+    return this.afs.collection('Comments', ref => ref.where('pageID', '==', pageID)).valueChanges();
+  }
 }
