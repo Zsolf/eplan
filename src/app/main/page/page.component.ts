@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FirebaseService} from '../../services/firebase.service';
-import { Comment } from '../models/comment.model';
-import Firebase from "firebase";
+import { Comment } from '../../models/comment.model';
+import Firebase from 'firebase';
 
 
 
@@ -34,11 +34,11 @@ export class PageComponent implements OnInit {
       this.fbService.getCommentsByPage(result[0].id).subscribe(res =>{
         this.comment = res[0].comment;
         this.author = res[0].author;
-  
+
       });
 
     });
- 
+
   }
 
   sendComment(): void{
@@ -49,7 +49,7 @@ export class PageComponent implements OnInit {
     this.com.pageID=this.text;
     this.com.createdAt= Firebase.firestore.Timestamp.fromDate(new Date);
     this.fbService.add("Comments",this.com);
-    
+
   }
 
 
