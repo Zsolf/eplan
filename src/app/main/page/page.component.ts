@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FirebaseService} from '../../services/firebase.service';
 import { Comment } from '../../models/comment.model';
 import Firebase from 'firebase';
+import { PageText } from 'src/app/models/pagemodel';
 
 
 
@@ -19,12 +20,18 @@ export class PageComponent implements OnInit {
   author: string;
   myComment: string;
   com: Comment
+  comArray: Comment[];
+  textField: string;
+  tf: PageText;
+
+
 
 
 
   ngOnInit(): void {
     this.myComment="";
     this.com={} as Comment;
+
     // This is a test for the database connection. Most of the database queries requires you to subsribe tot them which means
     // you wont get the data instantly, so you have to wait for it, but because of that the app is very responsive, since if you
     // change something it will change in the app too, because you are subscribed to the channel aka watching for changes.
@@ -32,11 +39,11 @@ export class PageComponent implements OnInit {
       this.text=result[0].id;
 
       this.fbService.getCommentsByPage(result[0].id).subscribe(res =>{
-        this.comment = res[0].comment;
-        this.author = res[0].author;
+       this.comArray=res;
 
       });
 
+      this.fbService.update("Pages", this.text, this.textField );
     });
 
   }
@@ -45,11 +52,21 @@ export class PageComponent implements OnInit {
     console.log(this.myComment);
     this.com.id="";
     this.com.author="zsolt";
-    this.com.comment="fvbfiov";
+    this.com.comment=this.myComment;
     this.com.pageID=this.text;
     this.com.createdAt= Firebase.firestore.Timestamp.fromDate(new Date);
     this.fbService.add("Comments",this.com);
+  }
 
+ 
+  
+  
+  update(): void{
+    console.log(this.textField);
+    this.tf.id="";
+    this.tf.project="";
+    this.tf.text=this.tf+this.textField;
+    this.fbService.add("Pages", this.tf);
   }
 
 

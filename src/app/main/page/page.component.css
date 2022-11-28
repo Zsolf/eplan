@@ -20,8 +20,8 @@
     height: 52px;
     padding-left: 15px;
     padding-right: 15px;
-    position: absolute;
-    top: 280px
+    position: absolute !important;
+    bottom: 70px;
   }
   
   ::ng-deep .title{
@@ -101,7 +101,7 @@
   }
 
   .send{
-    top: 283px;
+    bottom: 20px;
     margin-left: 200px;
     border: 2px solid black;
     border-radius: 20px;
@@ -109,4 +109,12 @@
     width:66px;
     height: 36px;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+    position: absolute;
+  }
+
+  .commentDiv{
+    margin-top:0px;
+    max-height:350px;
+    overflow-y: auto;
+
   }
