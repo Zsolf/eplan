@@ -14,7 +14,7 @@ export class ProjectComponent implements OnInit {
 
   ngOnInit(): void {
    this.fbService.getPagesByProject('1').subscribe(result => {
-      this.text = result[0].text + ' ' + result[1].text;
+
     });
   }
 

@@ -17,6 +17,10 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {MatButtonModule} from '@angular/material/button';
 import { PageComponent } from './page/page.component';
 import {AppRoutingModule} from '../app-routing.module';
+import {FileUploadModule} from 'primeng/fileupload';
+import {HttpClientModule} from '@angular/common/http';
+
+
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin
@@ -38,7 +42,9 @@ FullCalendarModule.registerPlugins([
     EditorModule,
     ProgressBarModule,
     MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FileUploadModule,
+    HttpClientModule
   ],
   exports:[
     MainComponent

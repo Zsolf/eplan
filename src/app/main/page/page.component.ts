@@ -5,11 +5,11 @@ import Firebase from 'firebase';
 import { PageText } from 'src/app/models/pagemodel';
 
 
-
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.css']
+
 })
 export class PageComponent implements OnInit {
 
@@ -21,7 +21,6 @@ export class PageComponent implements OnInit {
   myComment: string;
   com: Comment
   comArray: Comment[];
-  textField: string;
   tf: PageText;
 
 
@@ -31,19 +30,20 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {
     this.myComment="";
     this.com={} as Comment;
+    this.tf={id:""} as PageText;
 
     // This is a test for the database connection. Most of the database queries requires you to subsribe tot them which means
     // you wont get the data instantly, so you have to wait for it, but because of that the app is very responsive, since if you
     // change something it will change in the app too, because you are subscribed to the channel aka watching for changes.
-    this.fbService.getPagesByProject('1').subscribe(result => {
+    this.fbService.getPagesByProject('2').subscribe(result => {
       this.text=result[0].id;
+      this.tf=result[0];
 
       this.fbService.getCommentsByPage(result[0].id).subscribe(res =>{
        this.comArray=res;
 
       });
 
-      this.fbService.update("Pages", this.text, this.textField );
     });
 
   }
@@ -56,17 +56,25 @@ export class PageComponent implements OnInit {
     this.com.pageID=this.text;
     this.com.createdAt= Firebase.firestore.Timestamp.fromDate(new Date);
     this.fbService.add("Comments",this.com);
+    this.myComment="";
   }
 
  
-  
-  
   update(): void{
-    console.log(this.textField);
-    this.tf.id="";
     this.tf.project="";
-    this.tf.text=this.tf+this.textField;
+    this.tf.text=this.tf.text.substring(3, this.tf.text.length-4);
     this.fbService.add("Pages", this.tf);
+  }
+
+  upload(): void{
+
+
+  }
+
+  deleteComment(id: string): void{
+    console.log(id);
+    this.fbService.delete("Comments", id);
+
   }
 
 

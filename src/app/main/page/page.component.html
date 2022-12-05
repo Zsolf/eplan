@@ -2,14 +2,19 @@
     <mat-card class="main-content">
         <h2>&nbsp;Project Task's Page</h2>
         <br>
-        <p-editor></p-editor>
+        <p-editor [(ngModel)] ="this.tf.text"></p-editor>
 
         <div class="comments-div">
           <mat-card class="comments">
           
           <div class="commentDiv">
+            
             <h4 *ngFor="let comment of comArray" class="comment-content" > 
-              {{comment.author}}: {{comment.comment}}
+            <div>
+              {{comment.author}}:
+              <i class="pi pi-trash" (click)="deleteComment(comment.id)"></i>
+            </div>
+              {{comment.comment}}
               <hr>
             </h4>
           </div>
@@ -26,7 +31,9 @@
 
         <div class="buttons">
           <button mat-button class="save-documentation" (click)="update()">Save</button>
-          <button mat-button class="upload">Upload Document</button>
+          <button mat-button class="upload" >
+
+            Upload Document</button>
         </div>
 
 
