@@ -9,7 +9,7 @@
   
   .main-content{
     background: #f8f6ca;
-    height: 550px;
+    height:fit-content;
     width: 1112px;
   }
 
@@ -38,9 +38,8 @@
   }
 
   .buttons{
-    margin-top: 25px;
     right: 350px;
-    position: absolute;
+    position: relative;
   }
 
   .mat-toolbar {
@@ -82,6 +81,7 @@
     margin-top: 90px;
     left: 40px;
     position: absolute;
+    flex-direction: row;
   }
 
   .save-documentation{
@@ -103,15 +103,17 @@
   }
 
   .send{
-    bottom: 10px;
+    bottom: 7px;
     margin-left: 200px;
     border: 2px solid black;
     border-radius: 20px;
     font-size: 14px;
     width:66px;
-    height: 36px;
+    height: 40px;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
     position: absolute;
+    font-weight: 700;
+    
   }
 
   .commentDiv{
@@ -125,9 +127,75 @@
     position: relative;
     font-size: 15px;
     visibility: hidden;
+    color: black;
   }
 
   h4:hover .pi-trash{
     visibility: visible;
     cursor: pointer;
+
   }
+
+  ul:hover .pi-trash{
+    visibility: visible;
+    cursor: pointer;
+    font-size: 20px;
+    left: 250px;
+  }
+  
+  ::ng-deep .pi-upload{
+    font-size: 20px;
+  }
+
+  ::ng-deep .fileUpload{
+    position: relative !important;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+    font-weight: 700; 
+    font-size:22px;
+    color: black;
+    left: 130px;
+    width: 600px;
+    margin-top: 70px;
+
+  }
+
+  ::ng-deep .p-fileupload-choose:not(.p-disabled):hover {
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#E0D957), color-stop(100%,#eae151));
+    color:black;
+    border: 2px solid black;
+  }
+
+  ::ng-deep .fileUpload .pi  {
+    font-size: 25px
+  }
+ 
+  ::ng-deep .p-fileupload-choose {
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+    color:black;
+    font-weight: 650;
+    font-size: 20px;
+    border: 2px solid black;
+  }
+
+  ::ng-deep p-fileupload-choose .pi {
+    size:25;
+  }
+
+  ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button {
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+    color:black;
+    font-weight: 650;
+    font-size: 20px;
+  }
+
+  ::ng-deep .p-fileupload-buttonbar{
+    background: #f8f6ca;
+  }
+
+  .file{
+    color:blue;
+    pointer-events: all !important;
+  }
+
+
+ 

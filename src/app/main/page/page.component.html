@@ -10,7 +10,7 @@
           <div class="commentDiv">
             
             <h4 *ngFor="let comment of comArray" class="comment-content" > 
-            <div>
+            <div style="color: #007AD9">
               {{comment.author}}:
               <i class="pi pi-trash" (click)="deleteComment(comment.id)"></i>
             </div>
@@ -31,11 +31,36 @@
 
         <div class="buttons">
           <button mat-button class="save-documentation" (click)="update()">Save</button>
-          <button mat-button class="upload" >
-
-            Upload Document</button>
         </div>
 
+        <p-fileUpload #upload customUpload="true" (uploadHandler)="onUpload($event, upload)"
+          accept=".xlsx, .pdf, .docx, .doc" maxFileSize="10000000" styleClass="fileUpload">
+          <ng-template pTemplate="content" styleClass="fileInput">
+            <ul>
+              <li *ngFor="let file of uploadedFiles"><a class="file" href="{{file}}" target="_blank">Download Uploaded File</a>
+                <i class="pi pi-trash" (click)="deleteFile()"></i>
+
+              </li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+
+       
+          <!--  <button mat-button class="upload-document" maxFileSize="1000000" input type="file" 
+            id="myFile" name="filename" (click)="upload($event.target.files)">
+              <i class="pi pi-upload"></i> 
+              Upload</button>  
+          -->
+         <!-- <input type="file"  (change)="onUpload($event)" accept="image/*" maxFileSize="1000000" 
+         chooseLabel="Upload" 
+          styleClass="fileUpload">
+          -->
+
+       
+
+       
+      
+  
 
     </mat-card>
 </div>

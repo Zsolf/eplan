@@ -14,12 +14,17 @@ export class StorageService {
   usersAvatar: { id: string, avatar: string }[]
   currenUserAvatar: string;
 
-  async upload(data: any) {
-    await this.fireStorage.upload("/Documents/", data);
+  async upload(data: any, projectId:string, pageId:string) {
+    await this.fireStorage.upload("/Documents/"+projectId+'/'+pageId, data);
   }
 
-  delete(id: string) {
-    this.fireStorage.ref("/Documents/" + id).delete();
+  delete(projectId:string, pageId:string) {
+    this.fireStorage.ref("/Documents/"+projectId+'/'+pageId).delete();
+  }
+
+  getFile(projectId:string, pageId:string): Observable<any>{
+
+    return this.fireStorage.ref("/Documents/"+projectId+'/'+pageId).getDownloadURL();
   }
 
 }

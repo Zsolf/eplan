@@ -3,6 +3,8 @@ import {FirebaseService} from '../../services/firebase.service';
 import { Comment } from '../../models/comment.model';
 import Firebase from 'firebase';
 import { PageText } from 'src/app/models/pagemodel';
+import { FileUpload } from 'primeng/fileupload';
+import { StorageService } from 'src/app/services/firebase-storage.service'; 
 
 
 @Component({
@@ -12,16 +14,21 @@ import { PageText } from 'src/app/models/pagemodel';
 
 })
 export class PageComponent implements OnInit {
+  fileUploadService: any;
+  shortLink: any;
 
-  constructor(private fbService: FirebaseService) { }
+  constructor(private fbService: FirebaseService, private stService: StorageService) { }
 
-  text: string;
+
+  pageId: string;
   comment: string;
   author: string;
   myComment: string;
   com: Comment
   comArray: Comment[];
   tf: PageText;
+  uploadedFiles: any[]=[];
+  
 
 
 
@@ -32,13 +39,12 @@ export class PageComponent implements OnInit {
     this.com={} as Comment;
     this.tf={id:""} as PageText;
 
-    // This is a test for the database connection. Most of the database queries requires you to subsribe tot them which means
-    // you wont get the data instantly, so you have to wait for it, but because of that the app is very responsive, since if you
-    // change something it will change in the app too, because you are subscribed to the channel aka watching for changes.
+   
+     
     this.fbService.getPagesByProject('2').subscribe(result => {
-      this.text=result[0].id;
+      this.pageId=result[0].id;
       this.tf=result[0];
-
+      this.getFile();
       this.fbService.getCommentsByPage(result[0].id).subscribe(res =>{
        this.comArray=res;
 
@@ -53,7 +59,7 @@ export class PageComponent implements OnInit {
     this.com.id="";
     this.com.author="zsolt";
     this.com.comment=this.myComment;
-    this.com.pageID=this.text;
+    this.com.pageID=this.pageId;
     this.com.createdAt= Firebase.firestore.Timestamp.fromDate(new Date);
     this.fbService.add("Comments",this.com);
     this.myComment="";
@@ -66,9 +72,15 @@ export class PageComponent implements OnInit {
     this.fbService.add("Pages", this.tf);
   }
 
-  upload(): void{
 
 
+  onUpload(event, upload) {
+    this.uploadedFiles=[];
+    this.uploadedFiles.push(event.files[0]);
+    this.stService.upload(event.files[0],"2",this.pageId).then(r=> {
+      this.getFile();
+    });
+    upload.clear();
   }
 
   deleteComment(id: string): void{
@@ -77,5 +89,17 @@ export class PageComponent implements OnInit {
 
   }
 
+  getFile(){
+    this.stService.getFile("2",this.pageId).subscribe(result => {
+      this.uploadedFiles=[];
+      this.uploadedFiles.push(result);
+    });
+
+  }
+
+  deleteFile(){
+    this.stService.delete("2",this.pageId)
+    this.uploadedFiles=[];
+  }
 
 }

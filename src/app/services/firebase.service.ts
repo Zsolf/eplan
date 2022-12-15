@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
+import { FileUpload } from 'primeng/fileupload';
 
 @Injectable({
   providedIn: 'root'
