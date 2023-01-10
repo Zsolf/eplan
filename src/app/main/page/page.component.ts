@@ -15,7 +15,6 @@ import { StorageService } from 'src/app/services/firebase-storage.service';
 })
 export class PageComponent implements OnInit {
   fileUploadService: any;
-  shortLink: any;
 
   constructor(private fbService: FirebaseService, private stService: StorageService) { }
 
@@ -29,18 +28,12 @@ export class PageComponent implements OnInit {
   tf: PageText;
   uploadedFiles: any[]=[];
   
-
-
-
-
-
   ngOnInit(): void {
     this.myComment="";
     this.com={} as Comment;
     this.tf={id:""} as PageText;
 
    
-     
     this.fbService.getPagesByProject('2').subscribe(result => {
       this.pageId=result[0].id;
       this.tf=result[0];
