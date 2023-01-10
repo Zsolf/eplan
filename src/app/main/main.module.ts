@@ -19,6 +19,10 @@ import { PageComponent } from './page/page.component';
 import {AppRoutingModule} from '../app-routing.module';
 import {FileUploadModule} from 'primeng/fileupload';
 import {HttpClientModule} from '@angular/common/http';
+import { TasksComponent } from './tasks/tasks.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -27,7 +31,7 @@ FullCalendarModule.registerPlugins([
 ]);
 
 @NgModule({
-  declarations: [MainComponent, ProjectComponent, PageComponent],
+  declarations: [MainComponent, ProjectComponent, PageComponent, TasksComponent],
   imports: [
     CommonModule,
     MatToolbarModule,
@@ -44,7 +48,13 @@ FullCalendarModule.registerPlugins([
     MatButtonModule,
     AppRoutingModule,
     FileUploadModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers:[
+    MatDatepickerModule
   ],
   exports:[
     MainComponent

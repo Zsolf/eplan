@@ -1,0 +1,73 @@
+<div class="main-content-div">
+    <mat-card class="main-content">
+        <div class="main-tasks">
+            <mat-card class="title1">
+                <h2>Ongoing tasks</h2> 
+            </mat-card> 
+            <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceOngoing" class="mat-elevation-z8 demo-table">
+                <ng-container matColumnDef="demo-position">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element" (click)="selectTask(element)"> {{element.position}} </td>
+                </ng-container>
+                <ng-container matColumnDef="demo-title">
+                  <th mat-header-cell *matHeaderCellDef> Task </th>
+                  <td mat-cell *matCellDef="let element" (click)="selectTask(element)"> {{element.title}} </td>
+                </ng-container>
+                <ng-container matColumnDef="demo-deadline">
+                  <th mat-header-cell *matHeaderCellDef> Deadline </th>
+                  <td mat-cell *matCellDef="let element" (click)="selectTask(element)"> {{element.deadline}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table> 
+            </div>
+            <mat-card class="title2">
+              <h2>Completed tasks</h2>
+            </mat-card>   
+            <div class="table-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSourceCompleted" class="mat-elevation-z8 demo-table">
+                <ng-container matColumnDef="demo-position">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element" (click)="selectTask(element)"> {{element.position}} </td>
+                </ng-container>
+                <ng-container matColumnDef="demo-title">
+                  <th mat-header-cell *matHeaderCellDef> Task </th>
+                  <td mat-cell *matCellDef="let element" (click)="selectTask(element)"> {{element.title}} </td>
+                </ng-container>
+                <ng-container matColumnDef="demo-deadline">
+                  <th mat-header-cell *matHeaderCellDef> Deadline </th>
+                  <td mat-cell *matCellDef="let element" (click)="selectTask(element)"> {{element.deadline}} </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>   
+            </div>                 
+        </div>
+        <div class="settings-div">
+            <mat-card class="settings">
+              <mat-form-field class="task-title">
+                <input matInput type="text" [(ngModel)]="taskTitle" placeholder="Title:">
+              </mat-form-field>
+                <p-editor class="description" [(ngModel)]="text"></p-editor>
+                <mat-form-field class="status">
+                    <input matInput type="text" [(ngModel)]="taskStatus" placeholder="Set status:">
+                </mat-form-field>
+                <mat-form-field class="deadline">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="picker" [(ngModel)]="taskDeadline">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div class="buttons">
+                    <button mat-button class="save-changes" (click)="saveTask();createTask()">Save</button>
+                    <button mat-button class="clear" (click)="clearTask()">Clear</button>
+                    <button mat-button class="delete" (click)="deleteTask()">Delete</button>
+                </div>
+            </mat-card>
+          </div>
+    </mat-card>
+</div>

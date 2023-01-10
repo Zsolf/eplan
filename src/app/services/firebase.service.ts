@@ -39,4 +39,7 @@ export class FirebaseService {
   getAll(collectionName: string): Observable<any[]>{
     return this.afs.collection(collectionName).valueChanges();
   }
+  getTasksByProject(project: string): Observable<any>{
+    return this.afs.collection('Tasks', ref => ref.where('project', '==', project)).valueChanges();
+  }
 }

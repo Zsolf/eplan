@@ -32,8 +32,8 @@
   ::ng-deep .p-editor-container{
     padding-left: 25px;
     padding-top: 10px;
-    width: 750px;
-    height: 300px;
+    width: 750px !important;
+    height: 300px !important;
 
   }
 

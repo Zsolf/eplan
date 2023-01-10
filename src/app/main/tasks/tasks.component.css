@@ -1,0 +1,155 @@
+.main-content-div{
+    position: absolute;
+    margin-left: 400px;
+    margin-top: 100px;
+    height: inherit;
+    z-index: 10;
+    display: flex;
+  }
+  
+  .main-content{
+    background: #f8f6ca;
+    height: 550px;
+    width: 1112px;
+  }
+
+  .demo-table {
+    background: #f8f6ca;
+    width: 100%;
+    height: 49px;
+  }
+
+  .table-container {
+    overflow-y: scroll;
+    height: 198px;
+  }
+  
+  .mat-column-demo-position {
+    width: 10px;
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+    
+  }
+  
+  .mat-column-demo-title {
+    border-right: 1px solid currentColor;
+    padding-left: 16px;
+  }
+  
+  .mat-column-demo-deadline {
+    border-right: 1px solid currentColor;
+    width: 250px;
+    text-align: center;
+  }
+
+  ::ng-deep .title{
+    margin-left: 0px;
+    position: absolute;
+    top: 0px
+  }
+
+  ::ng-deep .task-title{
+    margin-left: 0px;
+    position: absolute;
+    top: 0px
+  }
+
+  .description{
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+    width: 275px !important;
+    height: 150px !important;
+  }
+
+  ::ng-deep .description .p-editor-container{
+    padding-left: 0px !important;
+    padding-top: 0px !important;
+    height: 150px  !important;
+    width: 275px !important;
+  }
+
+  ::ng-deep .status{
+    margin-left: 0px;
+    position: absolute;
+    top: 95px
+  }
+
+  ::ng-deep .deadline{
+    margin-left: 0px;
+    position: absolute;
+    top: 79px
+  }
+
+  ::ng-deep .mat-icon-button {
+    position:absolute !important;
+    bottom: -4px;
+    right: 4px;
+  }
+
+  .main-tasks{
+    width: 750px;
+  }
+
+  .settings-div{
+    margin-left: 30px;
+    height: inherit;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute !important; 
+    right: 10px;
+    top: 0px;
+  }
+
+  .settings{
+    height: 530px;
+    margin-top: 10px;
+    width: 300px;
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+    display: flex;
+    flex-direction: column;
+  }
+
+  .buttons{
+    margin-top: 90px;
+    left: 5px;
+    position: absolute;
+  }
+
+  .save-changes{
+    background:  #f8f6ca;
+    border: 2px solid black;
+    font-size: 15px;
+    border-radius: 30px;
+    width: 70px;
+    top: 375px;
+    margin-right: 250px;
+    margin-left: 10px;
+  }
+
+  .clear{
+    margin-left: 90px;
+    border: 2px solid black;
+    font-size: 15px;
+    border-radius: 30px;
+    width: 70px;
+    top: 334px;
+    background: #f8f6ca;
+  }
+
+  .delete{
+    margin-left: 25px;
+    border: 2px solid black;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 30px;
+    width: 100px;
+    top: 334px;
+    background: #f8f6ca;
+  }
+
+  tr{
+    cursor: pointer;
+  }
