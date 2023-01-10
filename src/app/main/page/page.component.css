@@ -6,7 +6,7 @@
     z-index: 10;
     display: flex;
   }
-  
+
   .main-content{
     background: #f8f6ca;
     height:fit-content;
@@ -23,7 +23,7 @@
     position: absolute !important;
     bottom: 55px;
   }
-  
+
   ::ng-deep .title{
     border-radius: 10px !important;
   }
@@ -62,7 +62,9 @@
 
   .comments{
     height: 492px;
+    margin-bottom: 10px;
     margin-top: 30px;
+    position: absolute;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
     display: flex;
     flex-direction: column;
@@ -70,7 +72,6 @@
 
   .comment-content{
     margin-bottom: 10px;
-    margin-top:0px;
     font-size: 17px;
     font-family: 'jost2' !important;
     margin-right: 10px;
@@ -113,7 +114,7 @@
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
     position: absolute;
     font-weight: 700;
-    
+
   }
 
   .commentDiv{
@@ -142,7 +143,7 @@
     font-size: 20px;
     left: 250px;
   }
-  
+
   ::ng-deep .pi-upload{
     font-size: 20px;
   }
@@ -150,7 +151,7 @@
   ::ng-deep .fileUpload{
     position: relative !important;
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
-    font-weight: 700; 
+    font-weight: 700;
     font-size:22px;
     color: black;
     left: 130px;
@@ -168,7 +169,7 @@
   ::ng-deep .fileUpload .pi  {
     font-size: 25px
   }
- 
+
   ::ng-deep .p-fileupload-choose {
     background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
     color:black;
@@ -198,4 +199,4 @@
   }
 
 
- 
+
