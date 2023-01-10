@@ -5,6 +5,7 @@ import Firebase from 'firebase';
 import { PageText } from 'src/app/models/pagemodel';
 import { FileUpload } from 'primeng/fileupload';
 import { StorageService } from 'src/app/services/firebase-storage.service'; 
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -16,7 +17,9 @@ import { StorageService } from 'src/app/services/firebase-storage.service';
 export class PageComponent implements OnInit {
   fileUploadService: any;
 
-  constructor(private fbService: FirebaseService, private stService: StorageService) { }
+  constructor(private fbService: FirebaseService, private stService: StorageService, private authservice:AuthService) { 
+
+  }
 
 
   pageId: string;
@@ -50,12 +53,13 @@ export class PageComponent implements OnInit {
   sendComment(): void{
     console.log(this.myComment);
     this.com.id="";
-    this.com.author="zsolt";
+    this.com.author=this.authservice.user.displayName;
     this.com.comment=this.myComment;
     this.com.pageID=this.pageId;
     this.com.createdAt= Firebase.firestore.Timestamp.fromDate(new Date);
     this.fbService.add("Comments",this.com);
     this.myComment="";
+
   }
 
  
