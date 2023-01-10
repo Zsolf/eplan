@@ -43,15 +43,10 @@
     text-align: center;
   }
 
-  ::ng-deep .title{
-    margin-left: 0px;
-    position: absolute;
-    top: 0px
-  }
+  
 
   ::ng-deep .task-title{
     margin-left: 0px;
-    position: absolute;
     top: 0px
   }
 
@@ -71,18 +66,16 @@
 
   ::ng-deep .status{
     margin-left: 0px;
-    position: absolute;
     top: 95px
   }
 
   ::ng-deep .deadline{
     margin-left: 0px;
-    position: absolute;
     top: 79px
   }
 
   ::ng-deep .mat-icon-button {
-    position:absolute !important;
+    position: absolute !important;
     bottom: -4px;
     right: 4px;
   }
