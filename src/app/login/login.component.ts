@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../services/auth.service';
 
+// @ts-ignore
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,9 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  constructor(public authService: AuthService) {}
+  ngOnInit(): void {}
 
 }

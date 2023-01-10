@@ -36,4 +36,7 @@ export class FirebaseService {
   getCommentsByPage(pageID: string): Observable<any>{
     return this.afs.collection('Comments', ref => ref.where('pageID', '==', pageID).orderBy("createdAt","asc")).valueChanges();
   }
+  getAll(collectionName: string): Observable<any[]>{
+    return this.afs.collection(collectionName).valueChanges();
+  }
 }

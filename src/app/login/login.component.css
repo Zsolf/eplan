@@ -13,8 +13,7 @@
   width: 500px;
   min-width: 500px;
   height: 300px;
-  min-height: 450px;
-  display: flex;
+  min-height: 300px;
   flex-direction: column;
   flex-wrap: wrap;
   align-items:center;
@@ -37,6 +36,10 @@ h2 {
   left: -190px;
   font-size: 25px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.imag{
+  margin-left: 70px;
 }
 
 .formCard{
@@ -80,7 +83,6 @@ input{
   flex-direction: column;
   flex-wrap: wrap;
   align-items:center;
-  margin-top: 30px;
 }
 
 

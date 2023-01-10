@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {TreeNode} from 'primeng/api';
 import { CalendarOptions } from '@fullcalendar/angular';
 import {Router} from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import app from 'firebase';
+import {FirebaseService} from '../services/firebase.service';
 
 @Component({
   selector: 'app-main',
@@ -12,9 +15,13 @@ export class MainComponent implements OnInit {
 
   files1: TreeNode[];
 
+  displayedName: string;
+
   node1: TreeNode;
   node2: TreeNode;
   node3: TreeNode;
+
+  pages = new Map<string, string[]>();
 
   selectedItem: TreeNode;
 
@@ -29,8 +36,11 @@ export class MainComponent implements OnInit {
     },
   };
 
-  constructor() {
+  constructor(public afAuth: AngularFireAuth, private router: Router, private fb: FirebaseService) {
     this.selectedComponent = 'main';
+    this.afAuth.authState.subscribe((user) => {
+      this.displayedName = user.displayName;
+    });
   }
 
 
@@ -43,6 +53,17 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fb.getAll('Projects').subscribe(result => {
+      result.forEach(project => {
+        this.pages.set(project.id, []);
+        this.fb.getPagesByProject(project.id).subscribe(res => {
+          res.forEach(page => {
+            this.pages.get(project.id).push(page.id);
+          });
+        });
+      });
+      console.log(this.pages);
+    })
     this.files1 = [];
     this.node1 = { label: 'Project 1',  expandedIcon: 'pi pi-folder-open', collapsedIcon: 'pi pi-folder', data: 'project',
       children: [{label: 'Tasks', data: 'task'},
@@ -62,6 +83,12 @@ export class MainComponent implements OnInit {
     this.files1.push(this.node1);
     this.files1.push(this.node2);
     this.files1.push(this.node3);
+  }
+
+  logOut(): any {
+    return this.afAuth.signOut().then(() => {
+      this.router.navigateByUrl('/login');
+    });
   }
 
 }
