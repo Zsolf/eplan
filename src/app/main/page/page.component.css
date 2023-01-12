@@ -13,7 +13,7 @@
     width: 1112px;
   }
 
-  ::ng-deep .title{
+  ::ng-deep .titleComment{
     margin-left: 0px;
     width: 265px;
     background-color: white;
@@ -24,8 +24,20 @@
     bottom: 55px;
   }
 
-  ::ng-deep .title{
+.delete{
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ea3028), color-stop(60%, #ee6b5d), color-stop(100%, #ea201b));
+  border: 2px solid black;
+  font-weight: 700;
+  font-size: 22px;
+  border-radius: 30px;
+  width: 100px;
+  margin-top: 15px;
+}
+
+
+::ng-deep .titleComment{
     border-radius: 10px !important;
+    bottom: 0 !important;
   }
 
 
@@ -39,7 +51,6 @@
 
   .buttons{
     right: 350px;
-    position: relative;
   }
 
   .mat-toolbar {
@@ -51,7 +62,7 @@
   .comments-div{
     margin-left: 30px;
     height: inherit;
-    width: 300px;
+    width: 300px !important;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -62,6 +73,7 @@
 
   .comments{
     height: 492px;
+    width: 300px;
     margin-bottom: 10px;
     margin-top: 30px;
     position: absolute;
@@ -79,10 +91,12 @@
   }
 
   .buttons{
-    margin-top: 90px;
-    left: 40px;
+    margin-top: 60px;
+    left: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     position: absolute;
-    flex-direction: row;
   }
 
   .save-documentation{
@@ -92,6 +106,7 @@
     font-size: 22px;
     border-radius: 30px;
     width: 80px;
+    margin-left: 10px;
   }
 
   .upload{
@@ -105,7 +120,7 @@
 
   .send{
     bottom: 7px;
-    margin-left: 200px;
+    margin-left: 120px;
     border: 2px solid black;
     border-radius: 20px;
     font-size: 14px;
@@ -117,14 +132,21 @@
 
   }
 
+  .commentText{
+    max-width: 200px;
+  }
+
   .commentDiv{
     margin-top:0px;
     max-height:350px;
     overflow-y: auto;
+    width: 280px;
+    overflow-x: hidden;
+    max-width: 280px;
   }
 
   ::ng-deep .pi-trash{
-    left: 185px;
+    left: 115px;
     position: relative;
     font-size: 15px;
     visibility: hidden;

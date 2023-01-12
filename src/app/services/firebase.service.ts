@@ -10,6 +10,16 @@ export class FirebaseService {
 
   constructor( private afs: AngularFirestore) { }
 
+  selectedPageId: string;
+  selectedProjectId: string;
+  newData: boolean;
+  selectedComponent: string;
+  needRefresh: boolean
+
+  setRefresh(): void{
+    this.needRefresh = !this.needRefresh;
+  }
+
   async add(collectionName: string, data: any, id?: string): Promise<string>{
     const uid = id ? id : this.afs.createId();
     data.id = uid;
@@ -22,7 +32,7 @@ export class FirebaseService {
   }
 
   getPagesByProject(project: string): Observable<any>{
-    return this.afs.collection('Pages', ref => ref.where('project', '==', project)).valueChanges();
+    return this.afs.collection('Pages', ref => ref.where('project', '==', project).orderBy('text','asc')).valueChanges();
   }
 
   update(collectionName: string, id: string, data: any){
@@ -37,9 +47,9 @@ export class FirebaseService {
     return this.afs.collection('Comments', ref => ref.where('pageID', '==', pageID).orderBy("createdAt","asc")).valueChanges();
   }
   getAll(collectionName: string): Observable<any[]>{
-    return this.afs.collection(collectionName).valueChanges();
+    return this.afs.collection(collectionName, ref => ref.orderBy("title", "asc")).valueChanges();
   }
   getTasksByProject(project: string): Observable<any>{
-    return this.afs.collection('Tasks', ref => ref.where('project', '==', project)).valueChanges();
+    return this.afs.collection('Tasks', ref => ref.where('project', '==', project).orderBy('title','asc')).valueChanges();
   }
 }

@@ -41,9 +41,15 @@
   margin-right: 10px;
 }
 
+.newProject{
+  margin-top: 60px !important;
+  z-index: 20;
+  cursor: pointer;
+}
+
 .sidebar{
-  width: 300px;
-  min-width: 300px;
+  width: 350px;
+  min-width: 350px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -66,7 +72,11 @@
   border: none;
   font-size: 30px;
   margin-left: -40px;
-  margin-top: 50px;
+  margin-top: 0px;
+}
+
+::ng-deep .p-tree-container{
+  max-height: 600px;
 }
 
 ::ng-deep .pi{

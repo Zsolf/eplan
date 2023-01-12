@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {FirebaseService} from '../../services/firebase.service';
 import { Comment } from '../../models/comment.model';
 import Firebase from 'firebase';
-import { PageText } from 'src/app/models/pagemodel';
+import { IPage } from 'src/app/models/pagemodel';
 import { FileUpload } from 'primeng/fileupload';
-import { StorageService } from 'src/app/services/firebase-storage.service'; 
+import { StorageService } from 'src/app/services/firebase-storage.service';
 import { AuthService } from 'src/app/services/auth.service';
+import * as uuid from 'uuid';
 
 
 @Component({
@@ -14,10 +15,10 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./page.component.css']
 
 })
-export class PageComponent implements OnInit {
+export class PageComponent implements OnInit, DoCheck {
   fileUploadService: any;
 
-  constructor(private fbService: FirebaseService, private stService: StorageService, private authservice:AuthService) { 
+  constructor(private fbService: FirebaseService, private stService: StorageService, public authservice: AuthService) {
 
   }
 
@@ -28,26 +29,44 @@ export class PageComponent implements OnInit {
   myComment: string;
   com: Comment
   comArray: Comment[];
-  tf: PageText;
+  tf: IPage;
   uploadedFiles: any[]=[];
-  
+
   ngOnInit(): void {
     this.myComment="";
     this.com={} as Comment;
-    this.tf={id:""} as PageText;
+    this.tf={id:""} as IPage;
 
-   
-    this.fbService.getPagesByProject('2').subscribe(result => {
-      this.pageId=result[0].id;
-      this.tf=result[0];
-      this.getFile();
-      this.fbService.getCommentsByPage(result[0].id).subscribe(res =>{
-       this.comArray=res;
+    if (this.fbService.selectedPageId != '') {
+      this.fbService.getById("Pages", this.fbService.selectedPageId).subscribe(result => {
+        this.pageId = result.id;
+        this.tf = result;
+        this.getFile();
+        this.fbService.getCommentsByPage(result.id).subscribe(res => {
+          this.comArray = res;
+
+        });
+      });
+    }
+
+  }
+
+  ngDoCheck(): void {
+    if (this.fbService.selectedPageId != this.pageId && this.fbService.selectedPageId != ''){
+      this.myComment="";
+      this.com={} as Comment;
+      this.tf={id:""} as IPage;
+      this.fbService.getById("Pages", this.fbService.selectedPageId).subscribe(result => {
+        this.pageId=result.id;
+        this.tf=result;
+        this.getFile();
+        this.fbService.getCommentsByPage(result.id).subscribe(res => {
+          this.comArray=res;
+
+        });
 
       });
-
-    });
-
+    }
   }
 
   sendComment(): void{
@@ -62,11 +81,26 @@ export class PageComponent implements OnInit {
 
   }
 
- 
+
   update(): void{
-    this.tf.project="";
-    this.tf.text=this.tf.text.substring(3, this.tf.text.length-4);
-    this.fbService.add("Pages", this.tf);
+    if (this.pageId == ''){
+      if (this.tf.text != undefined) {
+        this.tf.text = this.tf.text.substring(3, this.tf.text.length - 4);
+      }else{
+        this.tf.text = '';
+      }
+      this.tf.project = this.fbService.selectedProjectId;
+      this.tf.hasFile = false;
+      this.fbService.add("Pages", this.tf);
+      this.fbService.selectedComponent = 'project';
+    }else {
+      if (this.tf.text != undefined) {
+        this.tf.text = this.tf.text.substring(3, this.tf.text.length - 4);
+      }else{
+        this.tf.text = '';
+      }
+      this.fbService.add("Pages", this.tf, this.pageId);
+    }
   }
 
 
@@ -74,29 +108,46 @@ export class PageComponent implements OnInit {
   onUpload(event, upload) {
     this.uploadedFiles=[];
     this.uploadedFiles.push(event.files[0]);
-    this.stService.upload(event.files[0],"2",this.pageId).then(r=> {
+    this.tf.hasFile = true;
+    if(this.fbService.selectedPageId == ''){
+      this.pageId = uuid.v4();
+      this.tf.project = this.fbService.selectedProjectId
+    }
+    this.stService.upload(event.files[0], this.tf.project, this.pageId).then(r => {
       this.getFile();
     });
     upload.clear();
   }
 
   deleteComment(id: string): void{
-    console.log(id);
     this.fbService.delete("Comments", id);
 
   }
 
   getFile(){
-    this.stService.getFile("2",this.pageId).subscribe(result => {
-      this.uploadedFiles=[];
-      this.uploadedFiles.push(result);
-    });
+    this.uploadedFiles = [];
+    if(this.tf.hasFile == true) {
+      this.stService.getFile(this.tf.project, this.pageId).subscribe(result => {
+        this.uploadedFiles = [];
+        this.uploadedFiles.push(result);
+      });
+    }
 
   }
 
   deleteFile(){
-    this.stService.delete("2",this.pageId)
+    this.stService.delete(this.tf.project, this.pageId)
     this.uploadedFiles=[];
+    this.tf.hasFile = false;
+  }
+
+  delete(){
+    if (this.fbService.selectedPageId != '') {
+      this.fbService.delete("Pages", this.pageId);
+    }
+    this.fbService.selectedComponent = '';
+    this.fbService.selectedPageId = '';
+    this.fbService.setRefresh();
   }
 
 }

@@ -6,23 +6,25 @@
 
         <div class="comments-div">
           <mat-card class="comments">
-          
+
           <div class="commentDiv">
-            
-            <h4 *ngFor="let comment of comArray" class="comment-content" > 
+
+            <h4 *ngFor="let comment of comArray" class="comment-content" >
             <div style="color: #007AD9">
               {{comment.author}}:
-              <i class="pi pi-trash" (click)="deleteComment(comment.id)"></i>
+              <i  *ngIf="comment.author == authservice.user.displayName" class="pi pi-trash" (click)="deleteComment(comment.id)"></i>
             </div>
+            <div class="commentText">
               {{comment.comment}}
-              <hr>
-            </h4>
+            </div>
+            <hr>
+          </h4>
           </div>
 
             <mat-form-field class="title">
               <input matInput placeholder="Comment..." [(ngModel)] = "this.myComment">
             </mat-form-field>
-            
+
             <button mat-button class="send" (click)="sendComment()">Send</button>
 
           </mat-card>
@@ -31,6 +33,7 @@
 
         <div class="buttons">
           <button mat-button class="save-documentation" (click)="update()">Save</button>
+          <button mat-button class="delete" (click)="delete()">Delete</button>
         </div>
 
         <p-fileUpload #upload customUpload="true" (uploadHandler)="onUpload($event, upload)"
@@ -45,22 +48,22 @@
           </ng-template>
         </p-fileUpload>
 
-       
-          <!--  <button mat-button class="upload-document" maxFileSize="1000000" input type="file" 
+
+          <!--  <button mat-button class="upload-document" maxFileSize="1000000" input type="file"
             id="myFile" name="filename" (click)="upload($event.target.files)">
-              <i class="pi pi-upload"></i> 
-              Upload</button>  
+              <i class="pi pi-upload"></i>
+              Upload</button>
           -->
-         <!-- <input type="file"  (change)="onUpload($event)" accept="image/*" maxFileSize="1000000" 
-         chooseLabel="Upload" 
+         <!-- <input type="file"  (change)="onUpload($event)" accept="image/*" maxFileSize="1000000"
+         chooseLabel="Upload"
           styleClass="fileUpload">
           -->
 
-       
 
-       
-      
-  
+
+
+
+
 
     </mat-card>
 </div>

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, DoCheck, OnInit} from '@angular/core';
 import {FirebaseService} from '../../services/firebase.service';
 import Firebase from "firebase";
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,7 +17,7 @@ export interface TaskInformation {
   styleUrls: ['./tasks.component.css']
 })
 
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, DoCheck {
 
   constructor(private fbService: FirebaseService) { }
 
@@ -36,11 +36,21 @@ export class TasksComponent implements OnInit {
   i: number;
   iOngoing: number;
   iCompleted: number;
+  projectId: string;
 
   ngOnInit(): void {
 
     this.updateTable();
     this.clearTask();
+  }
+
+  ngDoCheck(): void {
+    if (this.projectId != this.fbService.selectedProjectId) {
+      this.dataSourceCompleted = new MatTableDataSource<any>();
+      this.dataSourceOngoing = new MatTableDataSource<any>();
+      this.updateTable();
+      this.clearTask();
+    }
   }
 
   updateTable(){
@@ -49,12 +59,13 @@ export class TasksComponent implements OnInit {
     this.i = 0;
     this.iOngoing = 0;
     this.iCompleted = 0;
-    this.fbService.getTasksByProject("1").subscribe(result => {
+    this.fbService.getTasksByProject(this.fbService.selectedProjectId).subscribe(result => {
+      this.projectId = this.fbService.selectedProjectId;
       while(result[this.i] != null){
         this.tempDeadline = new Date(result[this.i].deadline.seconds*1000);
         let t = {
-          position: 1, 
-          title: result[this.i].title, 
+          position: 1,
+          title: result[this.i].title,
           deadline: (this.tempDeadline.getMonth() + 1) + '/' + this.tempDeadline.getDate() + '/' + this.tempDeadline.getFullYear(),
           status: result[this.i].status,
           id: result[this.i].id,
@@ -92,28 +103,28 @@ export class TasksComponent implements OnInit {
         this.text = this.text.substring(3, this.text.length - 4);
       }
       let task = {
-        title: this.taskTitle, 
+        title: this.taskTitle,
         deadline: Firebase.firestore.Timestamp.fromDate(this.taskDeadline),
         description: this.text,
         status: this.taskStatus,
         id: this.taskID,
-        project: "1",
+        project: this.fbService.selectedProjectId,
       }
       this.fbService.update('Tasks', this.taskID, task);
       this.updateTable();
+      this.clearTask()
     }
   }
 
   createTask(){
     if(this.taskID == ""){
       let task = {
-        title: this.taskTitle, 
+        title: this.taskTitle,
         deadline: Firebase.firestore.Timestamp.fromDate(this.taskDeadline),
         description: this.text.substring(3, this.text.length - 4),
         status: this.taskStatus,
-        project: "1",
+        project: this.fbService.selectedProjectId,
       }
-      console.log(task);
       this.fbService.add('Tasks', task);
       this.updateTable();
     }

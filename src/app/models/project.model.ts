@@ -1,8 +1,7 @@
-import Firebase from "firebase";
 
-export interface ProjectText{
+export interface IProject{
     id: string;
     title: string;
     text: string;
-    members:string;
+    members: string;
 }

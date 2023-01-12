@@ -3,7 +3,7 @@
       <form>
         <mat-form-field class="title">
           <input matInput [(ngModel)] = "this.tf.title" placeholder="Title" name="title" >
-          
+
         </mat-form-field>
       </form>
       <div class="left-content">
@@ -12,24 +12,17 @@
 
     <div class="buttons">
       <button mat-button class="save-documentation" (click)="update()">Save</button>
-      <button mat-button class="join">Join</button>
+      <button mat-button class="join" (click)="join()" >Join</button>
+      <button mat-button class="add-page" (click)="addPage()">Add page</button>
+      <button mat-button class="delete" (click)="delete()">Delete</button>
     </div>
       </div>
     <div class="members-div">
       <mat-card class="members">
-        <div class="profile">
+        <div *ngFor="let member of members" class="profile">
           <img class="pfp" src="assets/profile.png">
-          <h2 class="name">Markus</h2>
-        </div>
-        <div class="profile">
+          <h2 class="name">{{member}}</h2>
           <mat-divider></mat-divider>
-          <img class="pfp" src="assets/profile.png">
-          <h2 class="name">Emilia</h2>
-        </div>
-        <div class="profile">
-          <mat-divider></mat-divider>
-          <img class="pfp" src="assets/profile.png">
-          <h2 class="name">Lara</h2>
         </div>
       </mat-card>
     </div>

@@ -108,6 +108,26 @@
   width: 80px;
 }
 
+.delete{
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%, #ea3028), color-stop(60%, #ee6b5d), color-stop(100%, #ea201b));
+  border: 2px solid black;
+  font-weight: 700;
+  font-size: 22px;
+  border-radius: 30px;
+  width: 100px;
+  margin-left: 15px;
+}
+
+.add-page{
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#eae151), color-stop(60%,#eee773), color-stop(100%,#eae151));
+  border: 2px solid black;
+  font-weight: 700;
+  font-size: 22px;
+  border-radius: 30px;
+  width: 130px;
+  margin-left: 15px;
+}
+
 .join{
   margin-left: 20px;
   border: 2px solid black;
