@@ -8,7 +8,7 @@
       </form>
       <div class="left-content">
       <p-editor [(ngModel)]="this.tf.text"></p-editor>
-      <p-progressBar [ngClass]="'progressBar'" value="60" ></p-progressBar>
+      <p-progressBar [ngClass]="'progressBar'" value="{{progress}}" ></p-progressBar>
 
     <div class="buttons">
       <button mat-button class="save-documentation" (click)="update()">Save</button>

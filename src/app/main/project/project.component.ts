@@ -20,14 +20,17 @@ export class ProjectComponent implements OnInit, DoCheck {
   title: string;
   tf: IProject;
   members: string[];
+  tasks: any[];
+  progressCount: number;
+  progress: number;
 
   ngOnInit(): void {
     this.title="";
     this.tf={id:""} as IProject;
     this.members = [];
+    this.progressCount = 0;
 
     if(this.fbService.selectedProjectId != '') {
-      console.log(this.fbService.selectedProjectId)
       this.fbService.getById("Projects", this.fbService.selectedProjectId).subscribe(result => {
         this.projectId = this.fbService.selectedProjectId
         this.tf = result;
@@ -37,6 +40,19 @@ export class ProjectComponent implements OnInit, DoCheck {
         }
 
       });
+      this.fbService.getTasksByProject(this.fbService.selectedProjectId).subscribe(res => {
+        this.tasks = res;
+        this.tasks.forEach(r => {
+          if (r.status == "completed") {
+            this.progressCount++;
+          }
+        });
+        this.progress = 0;
+        if (this.progressCount != 0) {
+          this.progress = Math.ceil((this.progressCount / res.length) * 100);
+        }
+      });
+
     }
   }
 
@@ -50,6 +66,19 @@ export class ProjectComponent implements OnInit, DoCheck {
           if (this.tf.members != '') {
             this.members = result.members.split(',');
             this.members.splice(this.members.indexOf(''));
+          }
+        });
+        this.fbService.getTasksByProject(this.fbService.selectedProjectId).subscribe(res => {
+          this.tasks = res;
+          this.progressCount = 0;
+          this.tasks.forEach(r => {
+            if (r.status == "completed") {
+              this.progressCount++;
+            }
+          });
+          this.progress = 0;
+          if (this.progressCount != 0) {
+            this.progress = Math.ceil((this.progressCount / res.length) * 100);
           }
         });
       }else{
@@ -81,7 +110,6 @@ export class ProjectComponent implements OnInit, DoCheck {
       this.fbService.selectedComponent = '';
       this.members = [];
     }else{
-      console.log(this.members)
       this.tf.members = '';
       this.members.forEach(r => {
         this.tf.members = this.tf.members + r + ',';

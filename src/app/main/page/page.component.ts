@@ -82,7 +82,6 @@ export class PageComponent implements OnInit, DoCheck {
   }
 
   sendComment(): void{
-    console.log(this.myComment);
     this.com.id="";
     this.com.author=this.authservice.user.displayName;
     this.com.comment=this.myComment;
@@ -101,7 +100,6 @@ export class PageComponent implements OnInit, DoCheck {
       }else{
         this.tf.text = '';
       }
-      console.log(this.tf)
       this.tf.project = this.fbService.selectedProjectId;
       this.tf.hasFile = false;
       this.fbService.add("Pages", this.tf);
