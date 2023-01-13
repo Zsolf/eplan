@@ -113,6 +113,7 @@ export class TasksComponent implements OnInit, DoCheck {
       this.fbService.update('Tasks', this.taskID, task);
       this.dataSourceCompleted = new MatTableDataSource<any>();
       this.dataSourceOngoing = new MatTableDataSource<any>();
+      this.clearTask();
       this.updateTable();
     }
   }
@@ -128,6 +129,7 @@ export class TasksComponent implements OnInit, DoCheck {
         project: this.fbService.selectedProjectId,
       }
       this.fbService.add('Tasks', task);
+      this.clearTask();
       this.updateTable();
     }
   }
