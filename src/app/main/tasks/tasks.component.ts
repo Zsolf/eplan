@@ -111,13 +111,15 @@ export class TasksComponent implements OnInit, DoCheck {
         project: this.fbService.selectedProjectId,
       }
       this.fbService.update('Tasks', this.taskID, task);
+      this.dataSourceCompleted = new MatTableDataSource<any>();
+      this.dataSourceOngoing = new MatTableDataSource<any>();
       this.updateTable();
-      this.clearTask()
     }
   }
 
   createTask(){
     if(this.taskID == ""){
+      console.log(this.taskTitle)
       let task = {
         title: this.taskTitle,
         deadline: Firebase.firestore.Timestamp.fromDate(this.taskDeadline),
