@@ -62,10 +62,11 @@
 }
 
 .pfp{
-  width: 50px;
+  width: 50px !important;
   filter: invert(100%);
   margin-right: 60px;
   margin-top: 10px;
+  height: 50px;
 }
 
 .profile{
@@ -76,7 +77,7 @@
 
 .name{
   margin-top:20px;
-  font-size: 30px;
+  font-size: 20px;
   font-family: 'jost2' !important;
   margin-right: 10px;
 }
@@ -135,4 +136,13 @@
   font-size: 22px;
   width: 100px;
   background: -webkit-gradient(linear, left top, right top, color-stop(0%,limegreen), color-stop(30%,limegreen), color-stop(100%,limegreen));
+}
+
+.leave{
+  margin-left: 20px;
+  border: 2px solid black;
+  border-radius: 30px;
+  font-size: 22px;
+  width: 100px;
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ea3028), color-stop(30%,#ea3028), color-stop(100%,#ea3028));
 }

@@ -29,9 +29,11 @@ export class ProjectComponent implements OnInit, DoCheck {
     if(this.fbService.selectedProjectId != '') {
       console.log(this.fbService.selectedProjectId)
       this.fbService.getById("Projects", this.fbService.selectedProjectId).subscribe(result => {
+        this.projectId = this.fbService.selectedProjectId
         this.tf = result;
         if (this.tf.members != '') {
           this.members = result.members.split(',');
+          this.members.splice(this.members.indexOf(''));
         }
 
       });
@@ -39,13 +41,25 @@ export class ProjectComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (this.projectId != this.fbService.selectedProjectId && this.fbService.selectedProjectId != ''){
-      this.fbService.getById("Projects", this.fbService.selectedProjectId).subscribe(result => {
-        this.tf = result;
-        if (this.tf.members != '') {
-          this.members = result.members.split(',');
-        }
-      });
+    if (this.projectId != this.fbService.selectedProjectId){
+      if(this.fbService.selectedProjectId != '') {
+        this.members = []
+        this.fbService.getById("Projects", this.fbService.selectedProjectId).subscribe(result => {
+          this.projectId = this.fbService.selectedProjectId
+          this.tf = result;
+          if (this.tf.members != '') {
+            this.members = result.members.split(',');
+            this.members.splice(this.members.indexOf(''));
+          }
+        });
+      }else{
+        this.projectId = '';
+        this.tf.id = '';
+        this.tf.members = '';
+        this.tf.title = '';
+        this.tf.text = '';
+        this.members = [];
+      }
     }
   }
 
@@ -54,7 +68,7 @@ export class ProjectComponent implements OnInit, DoCheck {
   }
 
   leave(): void{
-    delete this.members[this.members.indexOf(this.auth.user.displayName)];
+    this.members.splice(this.members.indexOf(this.auth.user.displayName));
   }
 
   update(): void{
@@ -65,11 +79,15 @@ export class ProjectComponent implements OnInit, DoCheck {
       });
       this.fbService.add("Projects", this.tf);
       this.fbService.selectedComponent = '';
+      this.members = [];
     }else{
+      console.log(this.members)
+      this.tf.members = '';
       this.members.forEach(r => {
         this.tf.members = this.tf.members + r + ',';
       });
       this.fbService.update("Projects", this.tf.id, this.tf);
+      this.members = [];
     }
   }
 

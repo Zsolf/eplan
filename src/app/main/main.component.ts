@@ -57,6 +57,7 @@ export class MainComponent implements OnInit, DoCheck {
   newProject(): void{
     this.fb.selectedComponent = 'project';
     this.fb.selectedProjectId = '';
+    console.log(this.fb.selectedProjectId);
   }
 
   reload(): void {

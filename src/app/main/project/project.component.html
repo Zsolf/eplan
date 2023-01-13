@@ -12,7 +12,8 @@
 
     <div class="buttons">
       <button mat-button class="save-documentation" (click)="update()">Save</button>
-      <button mat-button class="join" (click)="join()" >Join</button>
+      <button *ngIf="members.indexOf(auth.user.displayName) === -1" mat-button class="join" (click)="join()" >Join</button>
+      <button *ngIf="members.indexOf(auth.user.displayName) !== -1" mat-button class="leave" (click)="leave()" >Leave</button>
       <button mat-button class="add-page" (click)="addPage()">Add page</button>
       <button mat-button class="delete" (click)="delete()">Delete</button>
     </div>

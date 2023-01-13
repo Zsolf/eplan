@@ -52,20 +52,32 @@ export class PageComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    if (this.fbService.selectedPageId != this.pageId && this.fbService.selectedPageId != ''){
-      this.myComment="";
-      this.com={} as Comment;
-      this.tf={id:""} as IPage;
-      this.fbService.getById("Pages", this.fbService.selectedPageId).subscribe(result => {
-        this.pageId=result.id;
-        this.tf=result;
-        this.getFile();
-        this.fbService.getCommentsByPage(result.id).subscribe(res => {
-          this.comArray=res;
+    if (this.fbService.selectedPageId != this.pageId){
+      if(this.fbService.selectedPageId != '') {
+        this.myComment = "";
+        this.com = {} as Comment;
+        this.tf = {id: ""} as IPage;
+        this.fbService.getById("Pages", this.fbService.selectedPageId).subscribe(result => {
+          this.pageId = result.id;
+          this.tf = result;
+          this.fbService.selectedProjectId = result.project;
+          this.getFile();
+          this.fbService.getCommentsByPage(result.id).subscribe(res => {
+            this.comArray = res;
+          });
+        });
+      }else {
+        this.pageId = uuid.v4();
+        this.fbService.selectedPageId = this.pageId;
+        this.tf.project = this.fbService.selectedProjectId;
+        this.tf.text = ''
+        this.tf.hasFile= false;
+        this.comArray = [];
+        this.fbService.getCommentsByPage(this.pageId).subscribe(res => {
+          this.comArray = res;
 
         });
-
-      });
+      }
     }
   }
 
@@ -89,6 +101,7 @@ export class PageComponent implements OnInit, DoCheck {
       }else{
         this.tf.text = '';
       }
+      console.log(this.tf)
       this.tf.project = this.fbService.selectedProjectId;
       this.tf.hasFile = false;
       this.fbService.add("Pages", this.tf);
@@ -100,6 +113,7 @@ export class PageComponent implements OnInit, DoCheck {
         this.tf.text = '';
       }
       this.fbService.add("Pages", this.tf, this.pageId);
+      this.ngOnInit();
     }
   }
 
@@ -109,10 +123,8 @@ export class PageComponent implements OnInit, DoCheck {
     this.uploadedFiles=[];
     this.uploadedFiles.push(event.files[0]);
     this.tf.hasFile = true;
-    if(this.fbService.selectedPageId == ''){
-      this.pageId = uuid.v4();
-      this.tf.project = this.fbService.selectedProjectId
-    }
+    this.tf.project = this.fbService.selectedProjectId;
+
     this.stService.upload(event.files[0], this.tf.project, this.pageId).then(r => {
       this.getFile();
     });
