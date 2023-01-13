@@ -137,6 +137,8 @@ export class TasksComponent implements OnInit, DoCheck {
   deleteTask(){
     if(this.taskID != ""){
       this.fbService.delete('Tasks', this.taskID);
+      this.dataSourceCompleted = new MatTableDataSource<any>();
+      this.dataSourceOngoing = new MatTableDataSource<any>();
       this.clearTask();
       this.updateTable();
     }
